@@ -20,10 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	
 	@Query(value = "SELECT * FROM product WHERE res_type LIKE %:resType%" ,nativeQuery = true)
 	Optional<List<Product>> findAllByResType(@Param("resType") String resType);
-	
-	@Query(value = "SELECT * FROM product WHERE distance < ?1" ,nativeQuery = true)
-	Optional<List<Product>> findAllByDistance(String distance);
-	
+
 	@Query(value = "SELECT * FROM product WHERE rating > ?1" ,nativeQuery = true)
 	Optional<List<Product>> findAllByRating(String rating);
 	

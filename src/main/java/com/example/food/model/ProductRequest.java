@@ -8,16 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequest {
-	
+
+	private String image;
 	private String name;
-	private String imageUrl;
-	private String resType;
-	private String rating;
-	private String price;
-	private String distance;
-	private String fileName;
-	private String fileType;
-	private String bytes;
-	
+	private String color;
+	private Double price;
+	private String description;
 	
 }
