@@ -32,7 +32,13 @@ public class ProductController {
 	private final ProductService ProductService;
 	
 	 private final Logger logger = LoggerFactory.getLogger(ProductController.class);
-	
+
+	@GetMapping("/category/{categoryId}")
+	public ResponseEntity<List<Product>> getProductsByCategoryId(@PathVariable Long categoryId) {
+		List<Product> product = ProductService.getProductsByCategoryId(categoryId);
+		return ResponseEntity.status(HttpStatus.OK).body(product);
+	}
+
 	 // Get All Product
 	@GetMapping("/all")
 	public ResponseEntity<List<Product>> getAllProduct() {

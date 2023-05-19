@@ -3,6 +3,7 @@ package com.example.food.service;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.food.model.Category;
 import org.springframework.stereotype.Service;
 
 import com.example.food.exception.ProductException;
@@ -55,6 +56,11 @@ public class ProductService {
 		return  productRepository.findAllByPrice(price)
 				.orElseThrow(() -> new ProductException("No Products found with price < " + price));
 		
+	}
+
+	public List<Product> getProductsByCategoryId(Long categoryId) {
+		return productRepository.findByCategory(categoryId)
+				.orElseThrow(() -> new ProductException("No Product"));
 	}
 	
 	
