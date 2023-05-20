@@ -11,8 +11,9 @@ public class ProductRequest {
 
 	private String image;
 	private String name;
-	private String color;
 	private Double price;
 	private String description;
-	
+	private String type;
+	private int category_id;
+
 }

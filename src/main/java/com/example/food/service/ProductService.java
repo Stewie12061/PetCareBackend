@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.example.food.model.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.food.exception.ProductException;
@@ -27,11 +28,15 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
-	public Product getProductById(Long id) {
+	public Product getProductById(int id) {
 		return productRepository.findProductById(id)
 				.orElseThrow(() -> 
 				new ProductException(String.format("Product with id %s couldn't be found", id)));
 		
+	}
+
+	public List<Product> searchProducts(String query) {
+		return productRepository.findByNameStartingWithIgnoreCase(query);
 	}
 
 	public List<Product> getProductByName(String name) {
@@ -39,11 +44,15 @@ public class ProductService {
 				.orElseThrow(() -> new ProductException("No Products found with common name = " + name));
 		
 	}
-	
+	public void addProducts(List<Product> products) {
+		productRepository.saveAll(products);
+	}
+
+
 	public List<Product> getProductByResType(String resType) {
 		return  productRepository.findAllByResType(resType)
 				.orElseThrow(() -> new ProductException("No Products found with type = " + resType));
-		
+
 	}
 	
 	public List<Product> getProductByRating(String rating) {
@@ -58,10 +67,17 @@ public class ProductService {
 		
 	}
 
+	public List<Product> getDogProductsByCategoryId(Long categoryId) {
+		return productRepository.findDogByCategory(categoryId)
+				.orElseThrow(() -> new ProductException("No Product"));
+	}
+	public List<Product> getCatProductsByCategoryId(Long categoryId) {
+		return productRepository.findCatByCategory(categoryId)
+				.orElseThrow(() -> new ProductException("No Product"));
+	}
 	public List<Product> getProductsByCategoryId(Long categoryId) {
 		return productRepository.findByCategory(categoryId)
 				.orElseThrow(() -> new ProductException("No Product"));
 	}
-	
 	
 }

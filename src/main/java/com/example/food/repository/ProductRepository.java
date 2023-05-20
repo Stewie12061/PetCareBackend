@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 import com.example.food.model.Product;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long>{
+public interface ProductRepository extends JpaRepository<Product, Integer>{
 
-	Optional<Product> findProductById(Long id);
+	Optional<Product> findProductById(int id);
 	
 	@Query(value = "SELECT * FROM product WHERE name LIKE %:name%" ,nativeQuery = true)
 	Optional<List<Product>> findAllByName(@Param("name") String name);
@@ -28,6 +28,15 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Query(value = "SELECT * FROM product WHERE price < ?1" ,nativeQuery = true)
 	Optional<List<Product>> findAllByPrice(String price);
 
-	@Query(value = "SELECT * FROM product WHERE category_id like %:cateId%" ,nativeQuery = true)
+	@Query(value = "SELECT * FROM product WHERE category_id like %:cateId% and type = 'cat' ",nativeQuery = true)
+	Optional<List<Product>> findCatByCategory(Long cateId);
+
+	@Query(value = "SELECT * FROM product WHERE category_id like %:cateId% and type = 'dog' ",nativeQuery = true)
+	Optional<List<Product>> findDogByCategory(Long cateId);
+
+	@Query(value = "SELECT * FROM product WHERE category_id like %:cateId%",nativeQuery = true)
 	Optional<List<Product>> findByCategory(Long cateId);
+
+	List<Product> findByNameStartingWithIgnoreCase(String name);
+
 }

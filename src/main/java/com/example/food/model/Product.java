@@ -1,6 +1,7 @@
 package com.example.food.model;
 
 import com.example.food.model.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,12 +21,16 @@ public class Product {
 	private int id;
 	private String image;
 	private String name;
-	private String color;
 	private Double price;
 	private String description;
+	private String type;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-	
+
+	public int getCategory_id() {
+		return category != null ? category.getId() : null;
+	}
 }
