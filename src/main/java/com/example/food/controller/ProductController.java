@@ -17,8 +17,8 @@ import com.example.food.service.ProductService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-//@RestController
-@Controller
+@RestController
+//@Controller
 @RequestMapping("api/v1/product")
 @CrossOrigin
 public class ProductController {

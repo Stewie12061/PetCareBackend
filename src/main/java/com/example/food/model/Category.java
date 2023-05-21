@@ -18,8 +18,8 @@ public class Category {
     private int id;
     private String name;
     private String image;
-
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<Product> products;
+//
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+//    private List<Product> products;
 }
