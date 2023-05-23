@@ -3,6 +3,7 @@ package com.example.food.controller;
 import com.example.food.model.Category;
 import com.example.food.service.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,10 @@ public class CategoryController {
     @GetMapping("/all")
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
+    }
+
+    @GetMapping("/categoryName/{categoryId}")
+    public String getCategoryName(@PathVariable int categoryId){
+        return categoryService.getCategoryName(categoryId);
     }
 }

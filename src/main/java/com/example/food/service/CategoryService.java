@@ -17,4 +17,8 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
+
+    public String getCategoryName(int id) {
+        return categoryRepository.findCategoryNameById(id);
+    }
 }

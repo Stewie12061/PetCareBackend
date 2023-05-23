@@ -14,13 +14,9 @@ import java.util.Optional;
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite,Integer> {
 
-    List<Favorite> findByUser(User user);
-
     @Query("SELECT f.product FROM Favorite f WHERE f.user.id = :userId")
     List<Product> findFavoriteProductsByUserId(@Param("userId") Long userId);
 
-    Optional<Favorite> findByProduct_IdAndUser(int productId, User user);
-
-    void deleteByProduct_IdAndUser(Long productId, User user);
+    Optional<Favorite> findByProductIdAndUser(int productId, User user);
 
 }

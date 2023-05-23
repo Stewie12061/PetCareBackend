@@ -16,8 +16,6 @@ import java.util.List;
 public class FavoriteController {
     private final FavoriteService favoriteService;
 
-    // Constructor injection
-
     @PostMapping("/{userId}/favorites/add")
     public ResponseEntity<String> addToFavorites(@PathVariable Long userId, @RequestBody AddFavoriteRequest request) {
         favoriteService.addToFavorites(userId, request.getProductId());
@@ -32,8 +30,6 @@ public class FavoriteController {
 
     @DeleteMapping("/{userId}/favorites/{productId}")
     public ResponseEntity<String> removeFromFavorites(@PathVariable Long userId, @PathVariable int productId) {
-        // Validate if the favorite belongs to the user (optional)
-
         favoriteService.removeFromFavorites(productId, userId);
         return ResponseEntity.ok("Product removed from favorites successfully.");
     }

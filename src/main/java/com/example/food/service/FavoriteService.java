@@ -52,7 +52,7 @@ public class FavoriteService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        Favorite favorite = favoriteRepository.findByProduct_IdAndUser(productId, user)
+        Favorite favorite = favoriteRepository.findByProductIdAndUser(productId, user)
                 .orElseThrow(() -> new EntityNotFoundException("Favorite not found"));
 
         favoriteRepository.delete(favorite);
