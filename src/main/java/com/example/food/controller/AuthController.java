@@ -61,7 +61,7 @@ public class AuthController {
 		List<String> roles = userDetail.getAuthorities().stream()
 						.map(item -> item.getAuthority())
 						.collect(Collectors.toList());
-		JwtResponse response = new JwtResponse(jwt, userDetail.getId(), userDetail.getUsername(), userDetail.getEmail(), roles);
+		JwtResponse response = new JwtResponse(jwt, userDetail.getId(), userDetail.getUsername(), userDetail.getEmail(), userDetail.getFullname(), userDetail.getPhonenumber(), roles);
 
 		return ResponseEntity.ok(response);
 	}
@@ -84,7 +84,9 @@ public class AuthController {
 		User user = new User(
 				signUpRequest.getUserName(),
 				signUpRequest.getEmail(),
-				signUpRequest.getPassword()
+				signUpRequest.getPassword(),
+				signUpRequest.getFullname(),
+				signUpRequest.getPhonenumber()
 		);
 		
 		Set<String> strRoles = signUpRequest.getRole();

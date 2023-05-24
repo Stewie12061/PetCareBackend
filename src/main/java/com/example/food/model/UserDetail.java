@@ -16,17 +16,23 @@ public class UserDetail implements UserDetails {
 	private String username;
 	private String email;
 	private String password;
+	private String fullname;
+	private String phonenumber;
 	private Collection<? extends GrantedAuthority> autoAuthorities;
 	
 	public UserDetail(Long id, 
 					  String username, 
 					  String email, 
 					  String password,
+					  String fullname,
+					  String phonenumber,
 					  Collection<? extends GrantedAuthority> autoAuthorities) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.fullname = fullname;
+		this.phonenumber = phonenumber;
 		this.autoAuthorities = autoAuthorities;
 	}
 	
@@ -38,7 +44,9 @@ public class UserDetail implements UserDetails {
 		return new UserDetail(user.getId(), 
 							  user.getUsername(),
 							  user.getEmail(), 
-							  user.getPassword(), 
+							  user.getPassword(),
+							  user.getFullname(),
+							  user.getPhonenumber(),
 							  authorities);
 	}					
 	
@@ -87,4 +95,11 @@ public class UserDetail implements UserDetails {
 		return true;
 	}
 
+	public String getFullname() {
+		return fullname;
+	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
 }
