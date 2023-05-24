@@ -24,19 +24,31 @@ public class CartController {
         return ResponseEntity.ok("Product added to carts successfully.");
     }
 
+//    @GetMapping("/{userId}/carts")
+//    public ResponseEntity<List<Product>> getCartProducts(@PathVariable Long userId) {
+//        List<CartItem> cartItems = cartService.getCartItems(userId);
+//        List<Product> cartProducts = cartItems.stream()
+//                .map(CartItem::getProduct)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.status(HttpStatus.OK).body(cartProducts);
+//    }
+
     @GetMapping("/{userId}/carts")
-    public ResponseEntity<List<Product>> getCartProducts(@PathVariable Long userId) {
-        List<CartItem> cartItems = cartService.getCartItems(userId);
-        List<Product> cartProducts = cartItems.stream()
-                .map(CartItem::getProduct)
-                .collect(Collectors.toList());
-        return ResponseEntity.status(HttpStatus.OK).body(cartProducts);
+    public ResponseEntity<List<CartItem>> getCartItems(@PathVariable Long userId) {
+        List<CartItem> cartItems = cartService.getCartItemsByUserId(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(cartItems);
     }
 
-    @DeleteMapping("/{userId}/carts/{productId}")
-    public ResponseEntity<String> removeFromFavorites(@PathVariable Long userId, @PathVariable int productId) {
-        cartService.removeItemFromCart(productId, userId);
-        return ResponseEntity.ok("Product removed from favorites successfully.");
+    @DeleteMapping("/{userId}/carts/{itemId}")
+    public ResponseEntity<String> removeFromFavorites(@PathVariable Long userId, @PathVariable int itemId) {
+        cartService.removeItemFromCart(itemId, userId);
+        return ResponseEntity.ok("Product removed from carts successfully.");
+    }
+
+    @GetMapping("/{userId}/carts/total-price")
+    public ResponseEntity<Double> getTotalPrice(@PathVariable Long userId) {
+        double totalPrice = cartService.getTotalPrice(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(totalPrice);
     }
 
 }

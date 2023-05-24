@@ -45,13 +45,26 @@ public class CartService {
         return cartRepository.findCartItemsByUserId(userId);
     }
 
-    public void removeItemFromCart(int productId, Long userId) {
+    public void removeItemFromCart(int itemId, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        CartItem cartItem = cartRepository.findByProductIdAndUser(productId, user)
-                .orElseThrow(() -> new EntityNotFoundException("Favorite not found"));
+        CartItem cartItem = cartRepository.findByItemIdAndUser(itemId, user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Item not found"));
 
         cartRepository.delete(cartItem);
+    }
+
+    public double getTotalPrice(Long userId) {
+        List<CartItem> cartItems = cartRepository.findByUserId(userId);
+        double totalPrice = 0;
+        for (CartItem cartItem : cartItems) {
+            totalPrice += cartItem.getQuantity() * cartItem.getProduct().getPrice();
+        }
+        return totalPrice;
+    }
+
+    public List<CartItem> getCartItemsByUserId(Long userId) {
+        return cartRepository.findCartItemsByUserId(userId);
     }
 }

@@ -18,7 +18,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-//@Controller
 @RequestMapping("api/v1/product")
 @CrossOrigin
 public class ProductController {
