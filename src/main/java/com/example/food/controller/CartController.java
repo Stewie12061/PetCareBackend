@@ -40,9 +40,15 @@ public class CartController {
     }
 
     @DeleteMapping("/{userId}/carts/{itemId}")
-    public ResponseEntity<String> removeFromFavorites(@PathVariable Long userId, @PathVariable int itemId) {
+    public ResponseEntity<String> removeFromCarts(@PathVariable Long userId, @PathVariable int itemId) {
         cartService.removeItemFromCart(itemId, userId);
         return ResponseEntity.ok("Product removed from carts successfully.");
+    }
+
+    @DeleteMapping("/{userId}/carts/removeAll")
+    public ResponseEntity<String> removeAllFromCarts(@PathVariable Long userId) {
+        cartService.removeAllItemFromCart(userId);
+        return ResponseEntity.ok("All products removed from carts successfully.");
     }
 
     @GetMapping("/{userId}/carts/total-price")

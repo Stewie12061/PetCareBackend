@@ -21,4 +21,6 @@ public interface CartRepository extends JpaRepository<CartItem, Integer> {
 
     @Query(value = "SELECT * FROM cart_items crt WHERE crt.user_id like %:userId% and crt.id like %:itemId% ",nativeQuery = true)
     Optional<CartItem> findByItemIdAndUser(int itemId, Long userId);
+
+    List<CartItem> findByUser(User user);
 }

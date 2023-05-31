@@ -67,4 +67,13 @@ public class CartService {
     public List<CartItem> getCartItemsByUserId(Long userId) {
         return cartRepository.findCartItemsByUserId(userId);
     }
+
+    public void removeAllItemFromCart(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        List<CartItem> cartItems = cartRepository.findByUser(user);
+
+        cartRepository.deleteAll(cartItems);
+    }
 }
