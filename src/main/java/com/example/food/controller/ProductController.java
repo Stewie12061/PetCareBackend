@@ -73,20 +73,6 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.OK).body(products);
 	}
 	
-	// Get Products By Type
-	@GetMapping("/resType={resType}")
-	public ResponseEntity<List<Product>> getProductByResType(@PathVariable("resType") String resType) {
-		List<Product> products = ProductService.getProductByResType(resType);
-		return ResponseEntity.status(HttpStatus.OK).body(products);
-	}
-
-	// Get Products By Rating
-	@GetMapping("/rating={rating}")
-	public ResponseEntity<List<Product>> getProductByRating(@PathVariable("rating") String rating) {
-		List<Product> products = ProductService.getProductByRating(rating);
-		return ResponseEntity.status(HttpStatus.OK).body(products);
-	}
-	
 	// Get Products By Price
 	@GetMapping("/price={price}")
 	public ResponseEntity<List<Product>> getProductByPrice(@PathVariable("price") String price) {

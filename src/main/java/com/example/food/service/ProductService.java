@@ -47,19 +47,6 @@ public class ProductService {
 	public void addProducts(List<Product> products) {
 		productRepository.saveAll(products);
 	}
-
-
-	public List<Product> getProductByResType(String resType) {
-		return  productRepository.findAllByResType(resType)
-				.orElseThrow(() -> new ProductException("No Products found with type = " + resType));
-
-	}
-	
-	public List<Product> getProductByRating(String rating) {
-		return  productRepository.findAllByRating(rating)
-				.orElseThrow(() -> new ProductException("No Products found with rating > " + rating));
-		
-	}
 	
 	public List<Product> getProductByPrice(String price) {
 		return  productRepository.findAllByPrice(price)
